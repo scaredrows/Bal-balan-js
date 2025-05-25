@@ -46,6 +46,9 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/api', express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', require('./routes/api'));
+app.get('/', (req, res) => {
+  res.send('Halo dari backend rental sepak bola!');
+});
 
 app.all('*', (req, res) => {
     res.status(404);
