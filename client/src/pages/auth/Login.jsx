@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // 🟡 Tambahkan Link
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -30,7 +30,6 @@ const Login = () => {
 
       if (!res.ok) return setError(data.message);
 
-      // Redirect berdasarkan role
       if (data.role === 'admin') {
         navigate('/admin/dashboard');
       } else {
@@ -46,10 +45,29 @@ const Login = () => {
       <h2>Login</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+        />
         <button type="submit">Login</button>
       </form>
+
+      {/* 🟢 Tambahkan link lupa password */}
+      <div style={{ marginTop: '0.5rem' }}>
+        <Link to="/reset-password" style={{ fontSize: '0.9rem', color: '#007bff' }}>
+          Lupa Password?
+        </Link>
+      </div>
     </div>
   );
 };
